@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link ,withRouter} from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 import menuList from '../../config/menuConfig';
 import { Menu } from 'antd';
@@ -39,7 +39,7 @@ class index extends Component {
         pre.push((<Menu.Item key={item.key} icon={item.icon}><Link to={item.key}>{item.title}</Link></Menu.Item>))
       } else {
         // 查找与当前请求路劲匹配的子item
-        const cItem = item.children.find(cItem=>cItem.key===currentPath)
+        const cItem = item.children.find(cItem => currentPath.indexOf(cItem.key) === 0)
         if (cItem) {
           this.openKey = item.key
         }
@@ -59,9 +59,14 @@ class index extends Component {
 
   render() {
     // 得到当前请求的路径
-    const currentPath = this.props.location.pathname
+    let currentPath = this.props.location.pathname
     // 得到需要打开菜单项的key
     const openKey = this.openKey
+
+    if (currentPath.indexOf('/product') === 0) { // 说明当前请求的是商品或其子路由界面
+      currentPath = '/product'
+    }
+
     return (
       <div>
         <div className="left-nav">

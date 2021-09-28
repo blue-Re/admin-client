@@ -12,3 +12,15 @@ export const reqAddCategory = (categoryName,parentId)=>ajax('/manage/category/ad
 
 // 更新分类
 export const reqUpdateCategory = ({parentId,categoryName})=>ajax('/manage/category/update',{parentId,categoryName})
+
+// 获取商品分页列表
+export const reqProducts = (pageNum,pageSize)=>ajax('/manage/product/list',{pageNum,pageSize})
+
+// 搜索商品分页列表
+export const reqSearchProducts = ({pageNum,pageSize,searchName,searchType})=>ajax('/manage/product/search',{pageNum,pageSize,[searchType]:searchName})
+
+// 获取一个分类
+export const reqCategoryName = (categoryId)=>ajax('/manage/category/info',{categoryId})
+
+// 更新产品的状态
+export const reqUpdateStatus = (productId,status)=>ajax('/manage/product/updateStatus',{productId,status},'POST')
